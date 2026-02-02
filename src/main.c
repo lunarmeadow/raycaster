@@ -64,8 +64,8 @@ void PlayerMovement(player_t* pobj)
 
     if(IsKeyDown(KEY_LEFT_SHIFT))
     {
-        moveSpeed *= 2;
-        rotSpeed *= 2;
+        moveSpeed *= 1.5;
+        rotSpeed *= 1.5;
     }
 
     // FORWARDS/BACKWARDS
@@ -146,6 +146,18 @@ void PlayerMovement(player_t* pobj)
         pobj->planeX = pobj->planeX * cos(-rotSpeed) - pobj->planeY * sin(-rotSpeed);
         pobj->planeY = pobj->oldPlaneX * sin(-rotSpeed) + pobj->planeY * cos(-rotSpeed);
     }
+    
+    // VERTICAL AIM
+    if(IsKeyDown(KEY_I))   
+    {
+        if(pobj->angZ < 0 + (screenHeight / 2))
+            pobj->angZ += rotSpeed * screenHeight / 2;
+    }
+    if(IsKeyDown(KEY_K))
+    {
+        if(pobj->angZ > 0 - (screenHeight / 2))
+            pobj->angZ -= rotSpeed * screenHeight / 2;
+    }
 }
 
 int main()
@@ -164,7 +176,7 @@ int main()
     while (!WindowShouldClose()) 
     {
         BeginDrawing();
-        
+
         ClearBackground(RAYWHITE);
 
         PlayerMovement(&pobj);

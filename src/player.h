@@ -21,7 +21,7 @@ typedef struct player {
     float posX, posY;
 
     float oldAngX, oldAngY;
-    float angX, angY;
+    float angX, angY, angZ;
 
     // projection plane
     float oldPlaneX, oldPlaneY;

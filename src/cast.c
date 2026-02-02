@@ -118,8 +118,8 @@ void RayLoop(player_t* pobj, render_t* render)
         int lh = (int)(screenHeight / render->perpendicularDist);
 
         // draw start, end
-        int ds = -lh / 2 + screenHeight / 2;
-        int de = lh / 2 + screenHeight / 2;
+        int ds = (-lh / 2 + screenHeight / 2) + pobj->angZ;
+        int de = (lh / 2 + screenHeight / 2) + pobj->angZ;
 
         // cap low and high render positions
         if(ds < 0)
