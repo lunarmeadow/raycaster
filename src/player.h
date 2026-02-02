@@ -19,6 +19,12 @@
 typedef struct player {
     // int = whole tile position, frac = pos within tile
     float posX, posY;
+
+    float oldAngX, oldAngY;
     float angX, angY;
+
+    // projection plane
+    float oldPlaneX, oldPlaneY;
+    float planeX, planeY;
 } player_t;
 

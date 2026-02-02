@@ -43,8 +43,8 @@ void RayLoop(player_t* pobj, render_t* render)
 
         render->camX = 2 * x / (float)screenWidth - 1;
 
-        render->rayDirX = pobj->angX + render->planeX * render->camX;
-        render->rayDirY = pobj->angY + render->planeY * render->camX;
+        render->rayDirX = pobj->angX + pobj->planeX * render->camX;
+        render->rayDirY = pobj->angY + pobj->planeY * render->camX;
         
         // slower, verbose way to do this, but I want to be explicit as this is a learning project.
         // deltaDistX = abs(1 / rayDirX) and deltaDistY = abs(1 / rayDirY) are faster
@@ -121,6 +121,9 @@ void RayLoop(player_t* pobj, render_t* render)
         if(de >= screenHeight)
             de = screenHeight - 1;
 
-        DrawLine(x, ds, x, de, VIOLET);
+        if(render->hitSide == 0)
+            DrawLine(x, ds, x, de, VIOLET);
+        else if(render->hitSide == 1)
+            DrawLine(x, ds, x, de, DARKPURPLE);
     }
 }

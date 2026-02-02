@@ -29,9 +29,6 @@ typedef struct renderVars {
     // DDA step, once intersects are found, we can step {s | -1, 1} from intersection to rapidly traverse grid.
     int stepX, stepY;
 
-    // projection plane
-    float planeX, planeY;
-
     float rayDirX, rayDirY;
 
     // delta of x and y distance
