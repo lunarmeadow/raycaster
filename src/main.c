@@ -43,30 +43,36 @@ uint8_t worldMap[WORLD_WIDTH][WORLD_HEIGHT]=
   {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 };
 
-typedef struct player {
-    int posX, posY;
-    int angX, angY;
-} player_t;
+void InitializeStructures(player_t* p);
+{
+    p->posX = p->posY = 3;
+    p->angX = -1;
+    p->angY = 0;
+}
 
 int main()
 {
+    // use dependency injection to avoid ugly globals when sharing data.
+    player_t* pobj;
+    render_t* rVars;
+
+    InitializeStructures(pobj);
+
     InitWindow(screenWidth, screenHeight, "Test Window");
     SetTargetFPS(refreshRate);
-
-    player_t player;
-
-    player.posX = player.posY = 3;
-    player.angX = -1;
-    player.angY = 0;
 
     while (!WindowShouldClose()) 
     {
         BeginDrawing();
         
         ClearBackground(RAYWHITE);
+
+        RayLoop(pobj, rVars);
         
         EndDrawing();
     }
 
     CloseWindow();
+
+    return 0;
 }

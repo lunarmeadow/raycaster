@@ -14,17 +14,4 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#include "draw.h"
-#include "../objects/player.h"
-
-void RayLoop(player_t* pobj, render_t* render)
-{
-    // cast ray for each horizontal pixel of screen
-    for(int x = 0; x < screenWidth; x++)
-    {
-        render->camX = 2 * x / (float)screenWidth - 1;
-        
-        render->rayDirX = pobj->angX + render->planeX * render->camX;
-        render->rayDirY = pobj->angY + render->planeY * render->camX;
-    }
-}
+void RayLoop(player_t* pobj, render_t* vars);

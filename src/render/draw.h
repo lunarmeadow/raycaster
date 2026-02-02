@@ -17,3 +17,11 @@
 extern int screenWidth;
 extern int screenHeight;
 extern int refreshRate;
+
+typedef struct renderVars {
+    float time, oldtime;
+    
+    float camX;
+    float planeX, planeY;
+    float rayDirX, rayDirY;
+} render_t;
