@@ -62,6 +62,12 @@ void PlayerMovement(player_t* pobj)
 
     int testX, testY;
 
+    if(IsKeyDown(KEY_LEFT_SHIFT))
+    {
+        moveSpeed *= 2;
+        rotSpeed *= 2;
+    }
+
     // FORWARDS/BACKWARDS
     if (IsKeyDown(KEY_W))
     {
@@ -83,6 +89,31 @@ void PlayerMovement(player_t* pobj)
         {
             pobj->posX -= (pobj->angX * moveSpeed);
             pobj->posY -= (pobj->angY * moveSpeed);
+        }
+    }
+
+    // STRAFE
+    // FORWARDS/BACKWARDS
+    if (IsKeyDown(KEY_A))
+    {
+        testX = (int)((pobj->posX) - (pobj->planeX * moveSpeed));
+        testY = (int)((pobj->posY) - (pobj->planeY * moveSpeed));
+
+        if(worldMap[testX][testY] == 0) 
+        {
+            pobj->posX -= (pobj->planeX * moveSpeed);
+            pobj->posY -= (pobj->planeY * moveSpeed);
+        }
+    }
+    if (IsKeyDown(KEY_D))
+    {
+        testX = (int)((pobj->posX) + (pobj->planeX * moveSpeed));
+        testY = (int)((pobj->posY) + (pobj->planeY * moveSpeed));
+
+        if(worldMap[testX][testY] == 0) 
+        {
+            pobj->posX += (pobj->planeX * moveSpeed);
+            pobj->posY += (pobj->planeY * moveSpeed);
         }
     }
 
