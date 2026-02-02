@@ -89,8 +89,8 @@ void RayLoop(player_t* pobj, render_t* render)
             }
             else // y step
             {
-                render->sideDistX += render->dxDist;
-                mapX += render->stepX;
+                render->sideDistY += render->dyDist;
+                mapY += render->stepY;
                 render->hitSide = 1;
             }
 
@@ -99,11 +99,11 @@ void RayLoop(player_t* pobj, render_t* render)
                 hasIntersect = true;
         }
 
-        if(render->hitSide = 0)
+        if(render->hitSide == 0)
         {
             render->perpendicularDist = render->sideDistX - render->dxDist;
         }
-        else if(render->hitSide = 1)
+        else if(render->hitSide == 1)
         {
             render->perpendicularDist = render->sideDistY - render->dyDist;
         }
@@ -120,8 +120,6 @@ void RayLoop(player_t* pobj, render_t* render)
             ds = 0;
         if(de >= screenHeight)
             de = screenHeight - 1;
-
-        render->perpendicularDist = render->sideDistX - render->dxDist;
 
         DrawLine(x, ds, x, de, VIOLET);
     }
