@@ -16,6 +16,7 @@
 
 #pragma once
 
+#include "draw.h"
 #include "player.h"
 
 void RayLoop(player_t* pobj, render_t* render);

@@ -1,7 +1,7 @@
 # partially adapted from barrett's cmake, thank you erysdren :3
 
 cmake_minimum_required(VERSION 3.11)
-project(barrett
+project(raycaster
 	DESCRIPTION "An experimental raycaster built in C with raylib."
 	HOMEPAGE_URL "https://github.com/lunarmeadow/raycaster"
 	LANGUAGES C
@@ -42,8 +42,10 @@ target_link_options(ASAN::ASAN INTERFACE -fsanitize=address,undefined)
 
 set(SOURCES
 	${PROJECT_SOURCE_DIR}/src/main.c
-  ${PROJECT_SOURCE_DIR}/src/cast.c
-  ${PROJECT_SOURCE_DIR}/src/draw.c
+	${PROJECT_SOURCE_DIR}/src/cast.c
+	${PROJECT_SOURCE_DIR}/src/draw.c
+	${PROJECT_SOURCE_DIR}/src/gamestate.c
+	${PROJECT_SOURCE_DIR}/src/player.c
 )
 
 # BUILD TARGET CONFIG

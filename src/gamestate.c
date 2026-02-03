@@ -14,21 +14,23 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#pragma once
+#include "raylib.h"
+#include "player.h"
+#include "cast.h"
+#include "draw.h"
+#include "main.h"
 
-typedef struct player {
-    // int = whole tile position, frac = pos within tile
-    float posX, posY;
+player_t pobj;
+render_t rVars;
 
-    float oldAngX, oldAngY;
-    float angX, angY, angZ;
+void GameLoop()
+{
+    PlayerThink(&pobj);
+    RayLoop(&pobj, &rVars);
+}
 
-    // projection plane
-    float oldPlaneX, oldPlaneY;
-    float planeX, planeY;
-} player_t;
-
-
-// Can't use this as a function pointer sadly.
-void PlayerInitialize(player_t* pobj);
-void PlayerThink(player_t* pobj);
+void OnGameLoop()
+{
+    PlayerInitialize(&pobj);
+    loopfunc = GameLoop;
+}

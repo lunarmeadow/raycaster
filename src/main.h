@@ -21,4 +21,6 @@
 #define WORLD_WIDTH 16
 #define WORLD_HEIGHT 16
 
+extern void(*loopfunc)(void);
+
 extern uint8_t worldMap[WORLD_WIDTH][WORLD_HEIGHT];
