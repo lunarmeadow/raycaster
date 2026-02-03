@@ -70,6 +70,8 @@ bool MountPackFile()
             return false;
         }
     }
+
+    _isMounted = true;
 }
 
 bool LoadPackFile()
@@ -110,7 +112,7 @@ bool LoadPackFile()
     // we loaded alright
     printf("Added %s with %d lumps\n", mpkPath, NUM_LUMPS);
     _isLoaded = true;
-    
+
     // close and free miniz resources
     mz_zip_reader_end(&mpkArc);
 
@@ -135,4 +137,60 @@ void ClosePackFile()
 
     // reset state variables
     _isLoaded = _isMounted = false;
+}
+
+// -- FILE OPERATIONS --
+
+// indexing
+
+// returns a pointer to data, if you need size use GetLengthForLump
+void* MPK_GetLumpForName(const char* name)
+{
+    for(int i = 0; i < NUM_LUMPS; i++)
+    {
+        if(strcmp(name, entries[i].name) == 0)
+        {
+            return entries[i].data;
+        }
+    }
+
+    // nothing found
+    return nullptr;
+}
+
+void* MPK_GetLumpForNum(int lumpnum)
+{
+    if(lumpnum >= 0 && lumpnum < NUM_LUMPS)
+        return entries[lumpnum].data;
+    else
+        return nullptr;
+
+    return nullptr;
+}
+
+// length
+
+int MPK_GetLengthForLump(const char* name)
+{
+    for(int i = 0; i < NUM_LUMPS; i++)
+    {
+        if(strcmp(name, entries[i].name) == 0)
+        {
+            return entries[i].size;
+        }
+    }
+
+    // nothing found
+    return -1;
+}
+
+int MPK_GetLengthForNum(int lumpnum)
+{
+    if(lumpnum >= 0 && lumpnum < NUM_LUMPS)
+        return entries[lumpnum].size;
+    else
+        return -1;
+
+    // nothing found
+    return -1;
 }
